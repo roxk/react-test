@@ -20,6 +20,7 @@ const profiles: Profile[] = [];
 for (let i = 0; i < MaxProfileCount; ++i) {
     profiles.push({
         ...profileTemplate,
+        id: `profile_${i}`,
         gender: i % 2 == 0 ? Gender.Male : Gender.Female,
         user: {
             ...profileTemplate.user,

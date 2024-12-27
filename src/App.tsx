@@ -14,7 +14,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ServiceLocatorContextProvider>
           <Routes>
-            <Route path="user/{id}" element={<UserDetailScreen />} />
+            <Route path="user/:id" element={<UserDetailScreen />} />
             <Route path="user" element={<UserListScreen />} />
           </Routes>
         </ServiceLocatorContextProvider>

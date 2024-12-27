@@ -30,7 +30,7 @@ export const ProfileRowItem: React.FC<ProfileRowItemProps> = (props) => {
             <td className={valueStyle}>{dobNumeric(profile)}</td>
             <td className="rounded-r-lg">
                 <div className="flex items-center">
-                    <NavLink to={`user/${profile.user.email}`} className="text-header-text rounded-lg border border-header-text h-8 w-14 text-xs font-medium flex items-center justify-center mr-1"><span>Edit</span></NavLink>
+                    <NavLink to={`/user/${profile.id}`} className="text-header-text rounded-lg border border-header-text h-8 w-14 text-xs font-medium flex items-center justify-center mr-1"><span>Edit</span></NavLink>
                     <button onClick={onClickDelete} className="text-alert rounded-lg border border-alert h-8 w-14 text-xs font-medium flex items-center justify-center mr-1"><span>Delete</span></button>
                 </div>
             </td>
