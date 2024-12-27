@@ -14,6 +14,7 @@ export default {
       "table-header": "#FFFAE5",
       "table-row": "#FFFFFF",
       "dropdown-border": "#c9cdd4",
+      "input-border": "#f5f5f5",
       "header-text": "#555555",
       "dropdown-text": "#6b7785",
       "primary": "#ffd000",

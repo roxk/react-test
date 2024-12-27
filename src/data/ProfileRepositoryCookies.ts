@@ -39,6 +39,13 @@ export class ProfileRepositoryCookies implements ProfileRepository {
         result = result.slice(offset, offset + limit);
         return Promise.resolve({ profiles: result, totalCount: profiles.length });
     }
+    GetProfile(id: string): Promise<Profile> {
+        const result = profiles.find(p => p.id == id);
+        if (result == null) {
+            throw new NotFoundError();
+        }
+        return Promise.resolve(result);
+    }
     CreateProfile(profile: Profile): Promise<Profile> {
         // TODO: Validation?
         const created = {

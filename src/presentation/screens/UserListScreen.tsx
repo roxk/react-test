@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { Gender } from "../../domain/User";
-import { useProfileQuery } from "../query/ProfileQuery";
+import { useProfilesQuery } from "../query/ProfileQuery";
 import { ProfileRowItem } from "../components/ProfileRowItem";
 import { genderDisplay } from "../display/ProfileDisplay";
 import { Locale } from "../intl";
@@ -35,7 +35,7 @@ export const UserListScreen: React.FC = () => {
     const locale = useIntl().locale;
     const [gender, setGender] = useState<Gender>();
     const [rowPerPage, setRowPerPage] = useState<number>(defaultRowPerPage);
-    const { data: profileResult } = useProfileQuery((page - 1) * rowPerPage, rowPerPage, gender);
+    const { data: profileResult } = useProfilesQuery((page - 1) * rowPerPage, rowPerPage, gender);
     const profiles = profileResult?.profiles;
     const totalPageCount = useMemo(() => {
         return profileResult == null ? 1 : profileResult.totalCount == 0 ? 1 : Math.ceil(profileResult.totalCount / rowPerPage);
@@ -83,7 +83,7 @@ export const UserListScreen: React.FC = () => {
             <button onClick={onClickResetFilter} className="text-header-text underline text-xs">Reset filter</button>
             <div className="flex-1"></div>
             <div className="font-bold text-[22px] text-header-text w-28 text-right">Total {profileResult?.totalCount}</div>
-            <NavLink to="user/new" className="bg-primary h-8 w-[147px] rounded-lg ml-2 px-3 flex items-center text-xs font-bold text-header-text text-center justify-center"><span>Create User Account</span></NavLink>
+            <NavLink to="/user/new" className="bg-primary h-8 w-[147px] rounded-lg ml-2 px-3 flex items-center text-xs font-bold text-header-text text-center justify-center"><span>Create User Account</span></NavLink>
         </header>
         <table className="mt-2 w-full">
             <thead>
