@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useMutation, UseMutationResult, useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query";
 import { QueryKeys } from "./QueryKeys";
 import { useContext } from "react";
 import { Gender, Profile } from "../../domain/User";
@@ -20,5 +20,14 @@ export function useProfileQuery(id: string, isEnabled: boolean): UseQueryResult<
         return profile;
     }, {
         enabled: isEnabled
+    });
+}
+
+export function useDeleteProfileMutation(): UseMutationResult<void, unknown, string> {
+    const profileRepo = useContext(ServiceLocatorContext).profileRepository;
+    const queryClient = useQueryClient();
+    return useMutation(async (id: string) => {
+        await profileRepo.DeleteProfile(id);
+        queryClient.removeQueries(['profiles']);
     });
 }

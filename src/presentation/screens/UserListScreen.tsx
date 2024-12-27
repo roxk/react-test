@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import { Gender } from "../../domain/User";
-import { useProfilesQuery } from "../query/ProfileQuery";
+import { Gender, Profile } from "../../domain/User";
+import { useDeleteProfileMutation, useProfilesQuery } from "../query/ProfileQuery";
 import { ProfileRowItem } from "../components/ProfileRowItem";
 import { genderDisplay } from "../display/ProfileDisplay";
 import { Locale } from "../intl";
@@ -40,6 +40,7 @@ export const UserListScreen: React.FC = () => {
     const totalPageCount = useMemo(() => {
         return profileResult == null ? 1 : profileResult.totalCount == 0 ? 1 : Math.ceil(profileResult.totalCount / rowPerPage);
     }, [rowPerPage, profileResult]);
+    const { mutateAsync: deleteProfile } = useDeleteProfileMutation();
     const onClickGender = useCallback(() => {
         // TODO: Add dropdown/modal
         if (gender == null) {
@@ -50,9 +51,10 @@ export const UserListScreen: React.FC = () => {
             setGender(undefined);
         }
     }, [gender]);
-    const onDeleteProfile = useCallback(() => {
-
-    }, []);
+    const onDeleteProfile = useCallback((profile: Profile) => {
+        // TODO: Loading state
+        deleteProfile(profile.id).catch(console.error);
+    }, [deleteProfile]);
     const onClickRowPerPage = useCallback(() => {
         if (rowPerPage == 10) {
             setRowPerPage(5);

@@ -21,4 +21,5 @@ export interface ProfileRepository {
     GetProfile(id: string): Promise<Profile>;
     CreateProfile(profile: ProfileCreateRequest): Promise<Profile>;
     UpdateProfile(profile: Profile): Promise<Profile>;
+    DeleteProfile(id: string): Promise<void>;
 }

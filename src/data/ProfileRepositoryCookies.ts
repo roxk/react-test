@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
 import { NotFoundError } from "../domain/error/NotFoundError";
 import { Gender, Profile } from "../domain/User";
-import { ListProfileResult, ProfileRepository } from "./ProfileRepository";
+import { ListProfileResult, ProfileCreateRequest, ProfileRepository } from "./ProfileRepository";
+import { dobFromNumeric } from "../presentation/display/ProfileDisplay";
 
 const MaxProfileCount = 16;
 
@@ -46,10 +47,16 @@ export class ProfileRepositoryCookies implements ProfileRepository {
         }
         return Promise.resolve(result);
     }
-    CreateProfile(profile: Profile): Promise<Profile> {
-        // TODO: Validation?
-        const created = {
+    CreateProfile(profile: ProfileCreateRequest): Promise<Profile> {
+        const created: Profile = {
             ...profile,
+            id: `profile_${DateTime.now().toFormat("yyyy/MM/dd")}`,
+            dob: dobFromNumeric(profile.dob),
+            gender: profile.gender == "M" ? Gender.Male : Gender.Female,
+            user: {
+                email: profile.email ?? "",
+                phoneNumber: profile.phoneNumber ?? "",
+            }
         };
         profiles.push(created);
         return Promise.resolve(created);
@@ -64,5 +71,10 @@ export class ProfileRepositoryCookies implements ProfileRepository {
         }
         profiles[index] = updated;
         return Promise.resolve(updated);
+    }
+    DeleteProfile(id: string): Promise<void> {
+        const index = profiles.findIndex(p => p.id == id);
+        profiles.splice(index, 1);
+        return Promise.resolve();
     }
 }
