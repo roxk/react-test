@@ -189,7 +189,7 @@ const DetailImpl: React.FC<DetailImplProps> = (props) => {
         </div>
         {state.nameError != null ? <div className="text-xs text-red-600">{state.nameError}</div> : null}
         <div className="mt-5">
-            {/* <FormInput title="Gender" value="" /> */}
+            {/* TODO: Implement picker <FormInput title="Gender" value="" /> */}
             <FormInput className="ml-5" title="Date of Birth" value={state.dob} onChangeValue={state.onChangeDob} />
         </div>
         {state.dobError != null ? <div className="text-xs text-red-600">{state.dobError}</div> : null}

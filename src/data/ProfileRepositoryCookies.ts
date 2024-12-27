@@ -30,9 +30,9 @@ for (let i = 0; i < MaxProfileCount; ++i) {
     })
 }
 
+// TODO: Actually store in cookies...
 export class ProfileRepositoryCookies implements ProfileRepository {
     ListProfiles(offset: number, limit: number, gender?: Gender): Promise<ListProfileResult> {
-        // TODO: Implement offset limit...
         let result = profiles;
         if (gender != null) {
             result = result.filter(p => p.gender == gender);
