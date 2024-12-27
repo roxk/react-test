@@ -14,7 +14,7 @@ export function dobFromNumeric(input: string): DateTimeMaybeValid {
     return DateTime.fromFormat(input, "yyyy/MM/dd");
 }
 
-export function genderDisplay(gender: Gender, locale: Locale): string {
+export function genderDisplay(gender: Gender, _locale: Locale): string {
     switch (gender) {
         case Gender.Female:
             return "Female";
